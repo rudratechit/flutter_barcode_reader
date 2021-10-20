@@ -27,34 +27,35 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
         title = ""
         scannerView = ZXingScannerView(this)
         scannerView.setAutoFocus(true)
+        scannerView.flash = true
         // this paramter will make your HUAWEI phone works great!
         scannerView.setAspectTolerance(0.5f)
         setContentView(scannerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        if (flag) {
-//            val item = menu.add(
-//                0,
-//                TOGGLE_FLASH, 0, "Flash Off"
-//            )
-//            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-//            flag = false
-//        } else {
-        if (scannerView.flash) {
+        if (flag) {
             val item = menu.add(
                 0,
                 TOGGLE_FLASH, 0, "Flash Off"
             )
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+            flag = false
         } else {
-            val item = menu.add(
-                0,
-                TOGGLE_FLASH, 0, "Flash On"
-            )
-            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+            if (scannerView.flash) {
+                val item = menu.add(
+                    0,
+                    TOGGLE_FLASH, 0, "Flash Off"
+                )
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+            } else {
+                val item = menu.add(
+                    0,
+                    TOGGLE_FLASH, 0, "Flash On"
+                )
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+            }
         }
-//        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -69,8 +70,6 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
 
     override fun onResume() {
         super.onResume()
-        scannerView.flash = true
-        invalidateOptionsMenu()
         scannerView.setResultHandler(this)
         // start camera immediately if permission is already given
         if (!requestCameraAccessIfNecessary()) {
