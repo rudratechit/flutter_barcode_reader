@@ -26,6 +26,7 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
         title = ""
         scannerView = ZXingScannerView(this)
         scannerView.setAutoFocus(true)
+        scannerView.flash = true
         // this paramter will make your HUAWEI phone works great!
         scannerView.setAspectTolerance(0.5f)
         setContentView(scannerView)
@@ -34,7 +35,7 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (scannerView.flash) {
             val item = menu.add(
-                0,s
+                0,
                 TOGGLE_FLASH, 0, "Flash Off"
             )
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
@@ -60,7 +61,7 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
     override fun onResume() {
         super.onResume()
         scannerView.flash = true
-        invalidateOptionsMenu()
+        this.invalidateOptionsMenu()
         scannerView.setResultHandler(this)
         // start camera immediately if permission is already given
         if (!requestCameraAccessIfNecessary()) {
