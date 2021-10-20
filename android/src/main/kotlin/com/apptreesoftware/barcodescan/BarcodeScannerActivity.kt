@@ -42,19 +42,19 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
             flag = false
         } else {
-//            if (scannerView.flash) {
-//                val item = menu.add(
-//                    0,
-//                    TOGGLE_FLASH, 0, "Flash Off"
-//                )
-//                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-//            } else {
-//                val item = menu.add(
-//                    0,
-//                    TOGGLE_FLASH, 0, "Flash On"
-//                )
-//                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-//            }
+            if (scannerView.flash) {
+                val item = menu.add(
+                    0,
+                    TOGGLE_FLASH, 0, "Flash Off"
+                )
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+            } else {
+                val item = menu.add(
+                    0,
+                    TOGGLE_FLASH, 0, "Flash On"
+                )
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+            }
         }
         return super.onCreateOptionsMenu(menu)
     }
